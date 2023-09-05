@@ -1,4 +1,4 @@
-## Dicionário dos dados 
+=> Features para se entender
 
 * `customerID`: número de identificação única de cada cliente
 * `Churn`: se o cliente deixou ou não empresa 
@@ -16,8 +16,9 @@
 * `TechSupport`: assinatura adicional de suporte técnico, menos tempo de espera
 * `StreamingTV`: assinatura de TV a cabo 
 * `StreamingMovies`: assinatura de streaming de filmes 
-* `Contract`: tipo de contrato
 * `PaperlessBilling`: se o cliente prefere receber online a fatura
-* `PaymentMethod`: forma de pagamento
 * `Charges.Monthly`: Total de todos os serviços do cliente por mês
 * `Charges.Total`: total gasto pelo cliente
+-------------------------------------------------------
+* `PaymentMethod`: forma de pagamento
+* `Contract`: tipo de contrato
