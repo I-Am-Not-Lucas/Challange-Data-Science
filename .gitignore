@@ -5,3 +5,6 @@
 /todolist.txt
 /Study
 /Arquivos
+/path.py
+
+__pycache__/
