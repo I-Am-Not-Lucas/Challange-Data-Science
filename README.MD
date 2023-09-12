@@ -14,8 +14,8 @@ foi explicada a importância de reduzir a Taxa de Evasão de Clientes, também c
 
 ## Etapas
 
-:arrow_forward: Semana 1: ETL e EDA
+:arrow_forward: Semana 1: ETL e EDA  
 
-:arrow_forward: Semana 2: Criação do modelo
+:arrow_forward: Semana 2: Criação do modelo  
 
 :arrow_forward: Semana 3 e 4: Deploy do modelo
