@@ -1,5 +1,9 @@
 ## Challange de dados
 
+<div align="center">
+  <img src="identidade visual\PNG\Logo (6).png" style="width: 100%;">
+</div>
+
 ## Explicação
 O challange de dados é um desafio promovido pela alura de duração de 4 semanas, com intuito de praticar uma gama de skills
 
