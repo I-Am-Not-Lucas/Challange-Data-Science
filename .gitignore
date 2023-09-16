@@ -1,7 +1,10 @@
-/venv
 /proposta.txt
 /proposta.md
 /teste.py
 /todolist.txt
 /Study
 /Arquivos
+/path.py
+/teste/path.py
+__pycache__/
+/venv
