@@ -7,8 +7,6 @@ import pandas as pd
 from PIL import Image
 
 ## Configurações streamlit
-st.set_page_config(layout="wide")
-
 
 ## Tabela de opções
 GENDER_OPTIONS = ['Female', 'Male']
@@ -28,16 +26,25 @@ CONTRACT_OPTIONS = ['One year', 'Month-to-month', 'Two year']
 PAPERLESS_BILLING_OPTIONS = ['Yes', 'No']
 PAYMENT_METHOD_OPTIONS = ['Mailed check', 'Electronic check', 'Credit card (automatic)', 'Bank transfer (automatic)']
 
-path_best_model = "./Best_model.pkl"
-
-aba1, aba2= st.tabs(["DASHBOARD", "I.A"])
-
-
-with aba1:
-    st.write("Em construção")
+def trata_dados(dataframe):
+    dataframe = dataframe.replace()
 
 
-with aba2: 
+
+aba1, aba2= st.tabs(["IA", "DASHBOARD"])
+
+
+with aba2:
+    st.markdown("<h2 style='text-align: center;'>Em construção</h1>", unsafe_allow_html=True)
+
+
+with aba1: 
+    #Imagem novexus
+    image = Image.open("identidade visual\PNG\Logo (2).png")
+    st.image(image, use_column_width=True)
+    st.markdown("<h3 style='text-align: center;'>Modelo de previsão de churn</h3>", unsafe_allow_html=True)
+
+
     data_stranger = {}
     col1, col2, col3 = st.columns(3)
 
