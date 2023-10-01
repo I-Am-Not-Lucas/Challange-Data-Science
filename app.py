@@ -1,10 +1,12 @@
 import streamlit as st
 import pandas as pd
+from category_encoders import CatBoostEncoder
+from PIL import Image
+import pickle
 
-#import pickle
 #import seaborn as sns
 #import matplotlib.pyplot as plt
-from PIL import Image
+
 
 ## Configurações streamlit
 
@@ -26,10 +28,44 @@ CONTRACT_OPTIONS = ['One year', 'Month-to-month', 'Two year']
 PAPERLESS_BILLING_OPTIONS = ['Yes', 'No']
 PAYMENT_METHOD_OPTIONS = ['Mailed check', 'Electronic check', 'Credit card (automatic)', 'Bank transfer (automatic)']
 
-def trata_dados(dataframe):
-    dataframe = dataframe.replace()
+## Caminho dos modelos
+MODEL_PATH = "best_model.pkl"
+CATBOOST_ENCODER_PATH = "Catboost_Encoder.pkl"
+
+def trata_dados(dados_brutos):
+    catboost_importado = pickle.load(open(CATBOOST_ENCODER_PATH, 'rb'))
+
+    dataframe = pd.DataFrame([dados_brutos.values()], columns=dados_brutos.keys())
+  
+    dicionario = {'No internet service':0,
+                  'No phone service': 0,
+                  'No': 0,
+                  'Yes': 1,
+                  'Male': 0,
+                  'Female': 1}
+
+    dicionario2 = {'payment_method': 'account.PaymentMethod',
+                'contract': "account.Contract",
+                'internet_service': 'internet.InternetService'}
+
+    colunas = ['customer_gender', 'customer_senior_citizen',
+       'customer_partner', 'customer_dependents', 'customer_tenure',
+       'phone_service', 'multiple_lines',
+       'online_security', 'online_backup', 'device_protection', 'tech_support',
+       'streaming_tv', 'streaming_movies', 'paperless_billing', 'monthly_charges']
 
 
+    colunas_multiclasses = ['internet.InternetService', 
+                        'account.Contract',
+                        'account.PaymentMethod']
+
+    dataframe[colunas] = dataframe[colunas].replace(dicionario)
+
+    dataframe.rename(columns=dicionario2, inplace=True)
+
+    dataframe[colunas_multiclasses] = catboost_importado.transform(dataframe[colunas_multiclasses]) 
+
+    return dataframe
 
 aba1, aba2= st.tabs(["IA", "DASHBOARD"])
 
@@ -74,3 +110,10 @@ with aba1:
         data_stranger['payment_method'] = st.selectbox('Payment Method:', PAYMENT_METHOD_OPTIONS)
         data_stranger['monthly_charges'] = st.number_input('Monthly Charges:', min_value=0, max_value=100, value=18)
     
+
+    modelo_importado = pickle.load(open(MODEL_PATH, "rb"))
+
+    dados_tratados = trata_dados(data_stranger)
+    modelo_importado.predict(dados_tratados)
+
+st.button("Previsão")
