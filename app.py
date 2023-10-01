@@ -33,6 +33,22 @@ MODEL_PATH = "best_model.pkl"
 CATBOOST_ENCODER_PATH = "Catboost_Encoder.pkl"
 
 def trata_dados(dados_brutos):
+    colunas_originais = [ 'customer.gender', 
+           'customer.SeniorCitizen',
+       'customer.Partner', 
+       'customer.Dependents', 
+       'customer.tenure',
+       'phone.PhoneService', 
+       'phone.MultipleLines', 
+       'internet.OnlineSecurity', 
+       'internet.OnlineBackup',
+       'internet.DeviceProtection', 
+       'internet.TechSupport',
+       'internet.StreamingTV', 
+       'internet.StreamingMovies', 
+       'account.PaperlessBilling',
+       'account.Charges.Monthly']
+
     catboost_importado = pickle.load(open(CATBOOST_ENCODER_PATH, 'rb'))
 
     dataframe = pd.DataFrame([dados_brutos.values()], columns=dados_brutos.keys())
@@ -47,19 +63,17 @@ def trata_dados(dados_brutos):
     dicionario2 = {'payment_method': 'account.PaymentMethod',
                 'contract': "account.Contract",
                 'internet_service': 'internet.InternetService'}
+    
 
-    colunas = ['customer_gender', 'customer_senior_citizen',
-       'customer_partner', 'customer_dependents', 'customer_tenure',
-       'phone_service', 'multiple_lines',
-       'online_security', 'online_backup', 'device_protection', 'tech_support',
-       'streaming_tv', 'streaming_movies', 'paperless_billing', 'monthly_charges']
+    
+
 
 
     colunas_multiclasses = ['internet.InternetService', 
                         'account.Contract',
                         'account.PaymentMethod']
 
-    dataframe[colunas] = dataframe[colunas].replace(dicionario)
+    dataframe[colunas_originais] = dataframe[colunas_originais].replace(dicionario)
 
     dataframe.rename(columns=dicionario2, inplace=True)
 
@@ -85,30 +99,29 @@ with aba1:
     col1, col2, col3 = st.columns(3)
 
 
-
     with col1:
-        data_stranger['customer_gender'] = st.selectbox('Gender:', GENDER_OPTIONS)
-        data_stranger['customer_senior_citizen'] = st.selectbox('Senior Citizen:', SENIOR_CITIZEN_OPTIONS)
-        data_stranger['customer_partner'] = st.selectbox('Customer Partner:', CUSTOMER_PARTNER_OPTIONS)
-        data_stranger['customer_dependents'] = st.selectbox('Customer Dependents:', CUSTOMER_DEPENDENTS_OPTIONS)
-        data_stranger['customer_tenure'] = st.number_input('Customer Tenure:', min_value=0, max_value=100, value=18)
-        data_stranger['phone_service'] = st.selectbox('Phone Service:', PHONE_SERVICE_OPTIONS)
+        data_stranger['customer.gender'] = st.selectbox('Gender:', GENDER_OPTIONS)
+        data_stranger['customer.SeniorCitizen'] = st.selectbox('Senior Citizen:', SENIOR_CITIZEN_OPTIONS)
+        data_stranger['customer.Partner'] = st.selectbox('Customer Partner:', CUSTOMER_PARTNER_OPTIONS)
+        data_stranger['customer.Dependents'] = st.selectbox('Customer Dependents:', CUSTOMER_DEPENDENTS_OPTIONS)
+        data_stranger['customer.tenure'] = st.number_input('Customer Tenure:', min_value=0, max_value=100, value=18)
+        data_stranger['phone.PhoneService'] = st.selectbox('Phone Service:', PHONE_SERVICE_OPTIONS)
 
     with col3:
-        data_stranger['multiple_lines'] = st.selectbox('Multiple Lines:', MULTIPLE_LINES_OPTIONS)
-        data_stranger['internet_service'] = st.selectbox('Internet Service:', INTERNET_SERVICE_OPTIONS)
-        data_stranger['online_security'] = st.selectbox('Online Security:', ONLINE_SECURITY_OPTIONS)
-        data_stranger['online_backup'] = st.selectbox('Online Backup:', ONLINE_BACKUP_OPTIONS)
-        data_stranger['device_protection'] = st.selectbox('Device Protection:', DEVICE_PROTECTION_OPTIONS)
-        data_stranger['tech_support'] = st.selectbox('Tech Support:', TECH_SUPPORT_OPTIONS)
+        data_stranger['phone.MultipleLines'] = st.selectbox('Multiple Lines:', MULTIPLE_LINES_OPTIONS)
+        data_stranger['internet.InternetService'] = st.selectbox('Internet Service:', INTERNET_SERVICE_OPTIONS)
+        data_stranger['internet.OnlineSecurity'] = st.selectbox('Online Security:', ONLINE_SECURITY_OPTIONS)
+        data_stranger['internet.OnlineBackup'] = st.selectbox('Online Backup:', ONLINE_BACKUP_OPTIONS)
+        data_stranger['internet.DeviceProtection'] = st.selectbox('Device Protection:', DEVICE_PROTECTION_OPTIONS)
+        data_stranger['internet.TechSupport'] = st.selectbox('Tech Support:', TECH_SUPPORT_OPTIONS)
 
     with col2:
-        data_stranger['streaming_tv'] = st.selectbox('Streaming TV:', STREAMING_TV_OPTIONS)
-        data_stranger['streaming_movies'] = st.selectbox('Streaming Movies:', STREAMING_MOVIES_OPTIONS)
-        data_stranger['contract'] = st.selectbox('Contract:', CONTRACT_OPTIONS)
-        data_stranger['paperless_billing'] = st.selectbox('Paperless Billing:', PAPERLESS_BILLING_OPTIONS)
-        data_stranger['payment_method'] = st.selectbox('Payment Method:', PAYMENT_METHOD_OPTIONS)
-        data_stranger['monthly_charges'] = st.number_input('Monthly Charges:', min_value=0, max_value=100, value=18)
+        data_stranger['internet.StreamingTV'] = st.selectbox('Streaming TV:', STREAMING_TV_OPTIONS)
+        data_stranger['internet.StreamingMovies'] = st.selectbox('Streaming Movies:', STREAMING_MOVIES_OPTIONS)
+        data_stranger['account.Contract'] = st.selectbox('Contract:', CONTRACT_OPTIONS)
+        data_stranger['account.PaperlessBilling'] = st.selectbox('Paperless Billing:', PAPERLESS_BILLING_OPTIONS)
+        data_stranger['account.PaymentMethod'] = st.selectbox('Payment Method:', PAYMENT_METHOD_OPTIONS)
+        data_stranger['account.Charges.Monthly'] = st.number_input('Monthly Charges:', min_value=0, max_value=100, value=18)
     
 
     modelo_importado = pickle.load(open(MODEL_PATH, "rb"))
