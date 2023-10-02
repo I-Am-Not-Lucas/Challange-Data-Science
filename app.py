@@ -89,7 +89,7 @@ def trata_dados(dados_brutos):
     return dataframe
 
 ## Imagens
-image = Image.open('identidade visual\PNG\Logo3.png')
+image = Image.open('identidade visual/PNG/Logo3.png')
 st.image(image)
 
 
