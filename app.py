@@ -8,7 +8,7 @@ import pickle
 #import matplotlib.pyplot as plt
 
 
-## Configurações streamlit
+### Configurações streamlit
 
 ## Tabela de opções
 GENDER_OPTIONS = ['Female', 'Male']
