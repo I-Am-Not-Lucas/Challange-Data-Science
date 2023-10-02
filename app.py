@@ -135,7 +135,7 @@ with aba1:
         data_stranger['account.Charges.Monthly'] = st.number_input('Monthly Charges:', min_value=0, max_value=100, value=18)
     
 
-    modelo_importado = pickle.load(open("best_model.pkl", "rb"))
+    modelo_importado = pickle.load(open("best_model2.pkl", "rb"))
 
     dados_tratados = trata_dados(data_stranger)
     prediction = modelo_importado.predict(dados_tratados)
