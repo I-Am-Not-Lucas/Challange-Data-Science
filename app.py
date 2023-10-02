@@ -100,8 +100,10 @@ with aba2:
 
 with aba1: 
     #Imagem novexus
-    image = Image.open("'./identidade_visual/Logo (4).png'")
+    """
+    image = Image.open('./identidade_visual/Logo (4).png')
     st.image(image, use_column_width=True)
+    """
     st.markdown("<h3 style='text-align: center;'>Modelo de previsão de churn</h3>", unsafe_allow_html=True)
 
 
