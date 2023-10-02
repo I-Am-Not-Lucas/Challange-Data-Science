@@ -34,9 +34,6 @@ CATBOOST_ENCODER_PATH = "Catboost_Encoder.pkl"
 
 def trata_dados(dados_brutos):
     
-
-
-
     colunas_originais = [ 'customer.gender', 
            'customer.SeniorCitizen',
        'customer.Partner', 
@@ -91,6 +88,11 @@ def trata_dados(dados_brutos):
 
     return dataframe
 
+## Imagens
+image = Image.open('identidade visual\PNG\Logo(3).png')
+st.image(image)
+
+
 aba1, aba2= st.tabs(["IA", "DASHBOARD"])
 
 
@@ -101,8 +103,6 @@ with aba2:
 with aba1: 
     #Imagem novexus
     
-    image = Image.open('identidade visual\PNG\Logo(3).png')
-    st.image(image, use_column_width=True)
     
     st.markdown("<h3 style='text-align: center;'>Modelo de previsão de churn</h3>", unsafe_allow_html=True)
 
