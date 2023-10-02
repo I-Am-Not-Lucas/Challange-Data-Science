@@ -28,8 +28,7 @@ CONTRACT_OPTIONS = ['One year', 'Month-to-month', 'Two year']
 PAPERLESS_BILLING_OPTIONS = ['Yes', 'No']
 PAYMENT_METHOD_OPTIONS = ['Mailed check', 'Electronic check', 'Credit card (automatic)', 'Bank transfer (automatic)']
 
-## Caminho dos modelos
-MODEL_PATH = "best_model.pkl"
+## Caminhos
 CATBOOST_ENCODER_PATH = "Catboost_Encoder.pkl"
 
 def trata_dados(dados_brutos):
@@ -136,7 +135,7 @@ with aba1:
         data_stranger['account.Charges.Monthly'] = st.number_input('Monthly Charges:', min_value=0, max_value=100, value=18)
     
 
-    modelo_importado = pickle.load(open(MODEL_PATH, "rb"))
+    modelo_importado = pickle.load(open("best_model.pkl", "rb"))
 
     dados_tratados = trata_dados(data_stranger)
     prediction = modelo_importado.predict(dados_tratados)
