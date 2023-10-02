@@ -33,6 +33,10 @@ MODEL_PATH = "best_model.pkl"
 CATBOOST_ENCODER_PATH = "Catboost_Encoder.pkl"
 
 def trata_dados(dados_brutos):
+    
+
+
+
     colunas_originais = [ 'customer.gender', 
            'customer.SeniorCitizen',
        'customer.Partner', 
@@ -73,11 +77,17 @@ def trata_dados(dados_brutos):
                         'account.Contract',
                         'account.PaymentMethod']
 
+
+
+    ##Segundo tratamento
     dataframe[colunas_originais] = dataframe[colunas_originais].replace(dicionario)
 
     dataframe.rename(columns=dicionario2, inplace=True)
 
     dataframe[colunas_multiclasses] = catboost_importado.transform(dataframe[colunas_multiclasses]) 
+
+
+
 
     return dataframe
 
@@ -127,6 +137,22 @@ with aba1:
     modelo_importado = pickle.load(open(MODEL_PATH, "rb"))
 
     dados_tratados = trata_dados(data_stranger)
-    modelo_importado.predict(dados_tratados)
+    prediction = modelo_importado.predict(dados_tratados)
+    
+    # extra: probabilidade de churn
+    probability = modelo_importado.predict_proba(dados_tratados)
 
-st.button("Previsão")
+
+    #st.dataframe(dados_tratados)
+    if st.button('Fazer previsão'):
+        
+        
+        st.markdown("<h3 style='text-align: center;'>Resultado da previsão</h3>", unsafe_allow_html=True)  
+        
+        if prediction[0] == 0:
+            st.error('Churn: Não', icon="❌")
+        else:
+            st.success('Churn: Sim', icon="✅")
+                
+        st.progress(probability[0][1], text=f':black[Probabilidade de churn: {100*probability[0][1]:.2f}%]')
+
