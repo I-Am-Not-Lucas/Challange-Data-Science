@@ -30,3 +30,4 @@ foi explicada a importância de reduzir a Taxa de Evasão de Clientes, também c
 ### Aplicativo
 - [ ] Criar a tela de dashboards
 - [ ] Criaar um botão para baixar o modelo
+- [ ] Mudar o tema para "dark" deixando mais atrativo
