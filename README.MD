@@ -20,3 +20,13 @@ foi explicada a importância de reduzir a Taxa de Evasão de Clientes, também c
 
 :arrow_forward: Semana 3 e 4: Deploy do modelo
 
+## Pontos de melhoria do projeto
+- [ ] incomplete task
+- [ ] Fazer tunelagem de parâmetro com o GridCV
+
+
+- [ ] Item não selecionado
+- [x] Item selecionado
+- [ ] Outro item não selecionado
+
+

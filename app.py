@@ -3,12 +3,8 @@ import pandas as pd
 from category_encoders import CatBoostEncoder
 from PIL import Image
 import pickle
-
 #import seaborn as sns
 #import matplotlib.pyplot as plt
-
-
-### Configurações streamlit
 
 ## Tabela de opções
 GENDER_OPTIONS = ['Female', 'Male']
